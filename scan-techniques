@@ -1,0 +1,21 @@
+#TCP Connect Port Scan (Default when in normal user privilege)
+This uses full three way connection. Use SYN scan -sS is always a better choice. TCP connect scan is slower bcz is uses full three way connection. This way target machine can also store which attacker have tried to connect to them in there log files. Many services on average UNIX system will add it to syslog and when Nmap connects it closes the connnection without sending data. An administrator who sees a bunch of connection attempts in her logs from a single system should know that he/she has been connect scanned or TCP connect scanned.
+$ nmap 192.168.0.16 -sT
+
+#TCP SYN Port Scan (Default in root user privilege)
+It performs quickly, because it does not make a three way TCP connection but only two way TCP connection. It only works better if network is not protected by restricted firewalls. This technique is also known as half-open scanning. Client send a SYN packet to server and if server gives back SYN/ACK packet that means port is open. But if RST is send from server side, and if no reponse is received after several transmissions then port is marked as filter. Even if server only sends back just SYN flag without ACK flag then also port is also considered open.
+$ nmap 192.168.0.16 -sS
+
+#UDP Port Scan
+DNS, SNMP, DHCP are the three most common UDP services. It works by sending a UDP packet to every targeted port. Big challenge with UDP scanning is doing it quickly. A linux style limit of one packet per second makes a 65536 port scan takes more than 18 hours. To speed it up, scan more hosts in parallel, do quick scan of popular ports first, scan behind firewall and using --host-timeout argument to skip hosts which are slow.
+$ nmap 192.168.0.16 -sU
+
+TCP ACK Port Scan
+nmap 192.168.0.16 -sA
+
+TCP Window Port Scan 
+nmap 192.168.0.16 -sW
+
+TCP Maimon Port Scan
+nmap 192.168.0.16 -sM
+
