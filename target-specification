@@ -1,0 +1,22 @@
+#Scan a single ip
+nmap 192.168.0.16
+
+#Scan more IPs
+nmap 192.168.0.16 192.168.0.20
+
+#Scan range of IPs
+nmap 192.168.0.1-254
+
+#Scan a domain
+nmap docs.github.com
+
+#Scan using CIDR notation
+nmap 192.168.0.0/24 
+nmap 192.168.0.0/16
+nmap 192.168.0.0/8
+         
+#Scan IPs from a file
+nmap -iL targets.txt
+
+#Exclude an IP
+nmap --exclude 192.168.0.24
